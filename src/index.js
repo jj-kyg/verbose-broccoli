@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 const App = () => {
     return (
         <div>
-        <h1>Hello World</h1>
-        <h3>Hello back!</h3>
+            <h1>Hello World</h1>
+            <h3>Hello back!</h3>
         </div>
     )
 }
