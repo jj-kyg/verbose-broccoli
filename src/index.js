@@ -2,7 +2,10 @@ import ReactDOM from 'react-dom';
 
 const App = () => {
     return (
-        <div>Hello World</div>
+        <div>
+        <h1>Hello World</h1>
+        <h3>Hello back!</h3>
+        </div>
     )
 }
 
