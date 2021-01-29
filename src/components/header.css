@@ -1,0 +1,54 @@
+
+.header-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "logo linkOne linkTwo";
+    margin-top: -30px;
+}
+.links {
+    grid-area: linkTwo;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    text-decoration: 1.5px underline;
+}
+
+.img {
+    display: grid;
+    margin-top: 5px;
+    align-items: center;
+}
+
+.links > h2 {
+    padding: 5px;
+    margin-right: 10px;
+    margin-top: 0px;
+}
+
+#login {
+	display: inline;
+	position: relative;
+	font: 35px 'Courier New', Courier, monospace;
+	letter-spacing: -5px;
+	color: rgba(30, 30, 219, 0.589); 
+}
+
+#login:after {
+	content: "Log In";
+	position: absolute; left: 10px; top: 5px;
+	color: rgba(222,21,9);   
+}
+
+#signup {
+	display: inline;
+	position: relative;
+	font: 35px 'Courier New', Courier, monospace;
+	letter-spacing: -5px;
+	color: rgba(30, 30, 219, 0.589); 
+}
+
+#signup:after {
+	content: "Sign Up";
+	position: absolute; left: 10px; top: 5px;
+	color: rgba(222,21,9);   
+}

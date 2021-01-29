@@ -1,10 +1,17 @@
 import ReactDOM from 'react-dom';
 
+import { 
+    Header,
+    Search,
+    UserPosts, 
+} from './components';
+
 const App = () => {
     return (
         <div>
-            <h1>Hello World</h1>
-            <h3>Hello back!</h3>
+            <Header />
+            <Search />
+            <UserPosts />
         </div>
     )
 }
