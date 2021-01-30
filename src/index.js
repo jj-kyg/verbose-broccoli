@@ -5,17 +5,20 @@ import {
     Search,
     UserPosts,
     Login, 
-    SignUp
+    SignUp,
+    Multimodal
 } from './components';
 
 const App = () => {
     return (
         <div>
             <Header />
-            <Search />
-            <UserPosts />
             <Login />
             <SignUp />
+            <Multimodal />
+            <Search />
+            <UserPosts />
+
         </div>
     )
 }

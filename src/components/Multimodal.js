@@ -7,8 +7,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { shadows } from '@material-ui/system';{/*can i use this to set box shadows on modals? */}
-import './login.css';
-const Login = () => {
+import './multimodal.css';
+const Multimodal = () => {
     const [open, setOpen] = React.useState(false);
     const handleClickOpen = () => {
       setOpen(true);
@@ -17,31 +17,32 @@ const Login = () => {
       setOpen(false);
     };
     return (
-        <div className="login-container">      
+        <div className="multimodal">      
             <Button 
                 variant="outlined" 
                 color="primary" 
                 onClick={handleClickOpen}>
-                Test Login Modal
+                open multiModal
             </Button>
-            <Dialog className='login-modal-backdrop'
+            <Dialog className='multimodal-backdrop'
                 open={open} 
                 onClose={handleClose}
-                boxShadow={3}
                 PaperProps={{
                     style: {
                     backgroundColor: '#ef1a56ff',
+                    boxShadow: '5px, solid, green',
                     },
+                
                 }}
                 >
             <DialogTitle 
-                id="login-modal-title"
+                id="multimodal-title"
             >
-                Sign In
+                multimodal
             </DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    Please enter your Username and Password
+                    Posts or messages would be here
                 </DialogContentText>
             <TextField
                 autoFocus
@@ -73,4 +74,4 @@ const Login = () => {
         </div>
     )
 }
-export default Login;
+export default Multimodal;

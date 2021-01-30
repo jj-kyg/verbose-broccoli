@@ -1,7 +1,9 @@
 import './UserPosts.css';
+import Container from '@material-ui/core/Container'; {/*we use container here because it is responsive*/}
 
 const UserPosts = () => {
     return (
+        <Container maxWidth="md">
         <div className="post">
             <div id="post-info">
                 <div id="border">
@@ -15,6 +17,7 @@ const UserPosts = () => {
                 </div>
             </div>
         </div>
+        </Container>
     );
 }
 

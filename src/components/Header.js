@@ -1,3 +1,4 @@
+import React from 'react';
 import './header.css';
 
 const Header = () => {
@@ -7,13 +8,8 @@ const Header = () => {
                 <div className="img">
                     <img id="img" src="images/Logo-ST.png" alt="Logo"/>
                 </div>
-                <div className="links">
-                    <h2 id="login">Log In</h2>
-                    <h2 id="signup">Sign Up</h2>
-                </div>
             </header>
         </div>
     );
 }
-
 export default Header;
