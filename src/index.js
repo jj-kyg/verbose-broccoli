@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import { 
     Header,
     Search,
-    UserPosts, 
+    UserPosts,
+    Login, 
+    SignUp
 } from './components';
 
 const App = () => {
@@ -12,6 +14,8 @@ const App = () => {
             <Header />
             <Search />
             <UserPosts />
+            <Login />
+            <SignUp />
         </div>
     )
 }
