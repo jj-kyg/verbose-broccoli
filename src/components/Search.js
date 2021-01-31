@@ -2,28 +2,41 @@ import './Search.css';
 import SearchIcon from '@material-ui/icons/Search';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import { useState } from 'react';
 
 
 const Search = () => {
+
+  const [value, setValue] = useState('');
+
     return (
         <div className="search">
-        <Grid 
-            container 
-            spacing={1} 
-        >
-          <Grid item>
-            <SearchIcon />
-          </Grid>
-          <Grid item>
-            <TextField 
-                id="search-entry" 
-                label="Search Posts"
-                defaultValue="Search Posts"
-                variant="outlined" 
-            />
-          </Grid>
-        </Grid>
-      </div>
+          <div id="search-group">
+            <Grid 
+                  container 
+                  spacing={1} 
+              >
+              <div id="search-icon">
+                <Grid item>
+                  <SearchIcon />
+                </Grid>
+              </div>
+                <Grid item>
+                  <TextField 
+                      id="search-entry" 
+                      defaultValue="Search Posts"
+                      label="Search Posts"
+                      placeholder="Search Posts..."
+                      variant="outlined"
+                      value={value}
+                      onChange={(event) => setValue(event.target.value)} 
+                      
+                  />
+                </Grid>
+              </Grid>
+          </div>
+          {console.log(value)}
+        </div>
     )
 }
 export default Search;

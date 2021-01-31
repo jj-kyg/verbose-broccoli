@@ -22,7 +22,22 @@ body {
     display: flex;
     flex-direction: column;
     height: 175px;
+    width: 50%;
 }
 
+.header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.header-btns {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.login-container, .sign-up-container {
+    margin-right: 10px;
+}
 
 
