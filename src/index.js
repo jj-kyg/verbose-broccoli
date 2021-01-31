@@ -11,16 +11,6 @@ import {
 
 const App = () => {
     return (
-<<<<<<< HEAD
-        <div className="APP">
-            <Header />
-            <Login />
-            <SignUp />
-            <Multimodal />
-            <Search />
-            <UserPosts />
-
-=======
         <div>
             <div className="header">
                 <Header />
@@ -32,7 +22,6 @@ const App = () => {
             </div>
                 <Search />
                 <UserPosts />
->>>>>>> c8f01965fd91119431255839736950b94dfb209e
         </div>
     )
 }
