@@ -1,4 +1,4 @@
-import React from 'react'
+import {useState} from 'react'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,14 +8,20 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { shadows } from '@material-ui/system';{/*can i use this to set box shadows on modals? */}
 import './multimodal.css';
+
+
 const Multimodal = () => {
-    const [open, setOpen] = React.useState(false);
+
+    const [open, setOpen] = useState(false);
+
     const handleClickOpen = () => {
       setOpen(true);
     };
+
     const handleClose = () => {
       setOpen(false);
     };
+
     return (
         <div className="multimodal">      
             <Button 
@@ -54,7 +60,7 @@ const Multimodal = () => {
             <TextField
                 id="Password"
                 label="Password"
-                type="text"
+                type="password"
                 fullWidth
             />
             </DialogContent>

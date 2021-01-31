@@ -12,13 +12,16 @@ import {
 const App = () => {
     return (
         <div>
-            <Header />
-            <Login />
-            <SignUp />
-            <Multimodal />
-            <Search />
-            <UserPosts />
-
+            <div className="header">
+                <Header />
+                <div className="header-btns">
+                    <Login />
+                    <SignUp />
+                    <Multimodal />
+                </div>
+            </div>
+                <Search />
+                <UserPosts />
         </div>
     )
 }
