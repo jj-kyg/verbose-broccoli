@@ -11,7 +11,7 @@ import {
 
 const App = () => {
     return (
-        <div>
+        <div className="APP">
             <Header />
             <Login />
             <SignUp />

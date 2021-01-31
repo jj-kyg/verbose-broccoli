@@ -32,7 +32,6 @@ const Multimodal = () => {
                     backgroundColor: '#ef1a56ff',
                     boxShadow: '5px, solid, green',
                     },
-                
                 }}
                 >
             <DialogTitle 
