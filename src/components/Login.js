@@ -1,4 +1,5 @@
-import React from 'react'
+import { useState } from 'react'
+import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,25 +9,27 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { shadows } from '@material-ui/system';{/*can i use this to set box shadows on modals? */}
 import './login.css';
-const Login = () => {
-    const [open, setOpen] = React.useState(false);
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-    const handleClose = () => {
-      setOpen(false);
-    };
+
+const Login = ({
+    setLoggedIn,
+    loginUser
+}) => {
+
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState('');
+    const [passwordValue, setPasswordValue] = useState('');
+
     return (
         <div className="login-container">      
             <Button 
                 variant="outlined" 
                 color="primary" 
-                onClick={handleClickOpen}>
-                Test Login Modal
+                onClick={() => setOpen(true)}>
+                Login
             </Button>
             <Dialog className='login-modal-backdrop'
                 open={open} 
-                onClose={handleClose}
+                onClose={() => setOpen(false)}
                 boxShadow={3}
                 PaperProps={{
                     style: {
@@ -49,24 +52,34 @@ const Login = () => {
                 label="Username"
                 type="text"
                 fullWidth
+                value={value}
+                onChange={(event) => setValue(event.target.value)}
+                
             />
             <TextField
                 id="Password"
                 label="Password"
-                type="text"
+                type="password"
                 fullWidth
+                value={passwordValue}
+                onChange={(event) => setPasswordValue(event.target.passwordValue)}
+                
             />
             </DialogContent>
             <DialogActions>
                 <Button 
-                    onClick={handleClose} 
+                    onClick={() => setOpen(false)} 
                     color="primary">
                     Cancel
                 </Button>
                 <Button 
-                    onClick={handleClose} 
+                    onClick={() => {
+                        setOpen(false);
+                        setLoggedIn(true);
+                        loginUser(value, passwordValue);
+                    }} 
                     color="primary">
-                    Login
+                    <Link to="/loggedin">Login</Link>
                 </Button>
             </DialogActions>
             </Dialog>       

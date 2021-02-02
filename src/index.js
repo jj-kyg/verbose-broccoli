@@ -1,4 +1,12 @@
 import ReactDOM from 'react-dom';
+import { useState } from 'react';
+
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Switch
+} from 'react-router-dom'
 
 import { 
     Header,
@@ -6,23 +14,35 @@ import {
     UserPosts,
     Login, 
     SignUp,
+    SignOut,
     Multimodal
 } from './components';
 
+import {
+    registerUser,
+    loginUser,
+} from './api';
+
 const App = () => {
+
+    const [loggedIn, setLoggedIn] = useState(false);
+
     return (
-        <div>
-            <div className="header">
-                <Header />
-                <div className="header-btns">
-                    <Login />
-                    <SignUp />
-                    <Multimodal />
+        <Router>
+            <div>
+                <div className="header">
+                    <Header />
+                    <div className="header-btns">
+                        {loggedIn ? '' : <Login loginUser={loginUser} setLoggedIn={setLoggedIn} />}
+                        {loggedIn ? '' : <SignUp registerUser={registerUser}/>}
+                        {loggedIn ? <SignOut setLoggedIn={setLoggedIn}/> : ''}
+                        <Multimodal />
+                    </div>
                 </div>
+                    <Search />
+                    <UserPosts loggedIn={loggedIn} />
             </div>
-                <Search />
-                <UserPosts />
-        </div>
+        </Router>
     )
 }
 

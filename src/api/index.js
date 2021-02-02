@@ -1,15 +1,16 @@
 const BASE = 'https://strangers-things.herokuapp.com/api/2010-LSU-RM-WEB-PT';
 
-async function registerUser() {
-    fetch(`${BASE}/users/register`, {
+export async function registerUser(username, password) {
+  console.log(username, password);  
+  fetch(`${BASE}/users/register`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           user: {
-            username: 'superman279',
-            password: 'krypt0n0rbust'
+            username: username,
+            password: password
           }
         })
       }).then(response => response.json())
@@ -19,9 +20,7 @@ async function registerUser() {
         .catch(console.error);
 }
 
-registerUser();
-
-async function loginUser() {
+export async function loginUser(username, password) {
     fetch(`${BASE}/users/login`, {
         method: "POST",
         headers: {
@@ -29,8 +28,8 @@ async function loginUser() {
         },
         body: JSON.stringify({
           user: {
-            username: 'superman27',
-            password: 'krypt0n0rbust'
+            username: username,
+            password: password
           }
         })
       }).then(response => response.json())
@@ -40,7 +39,7 @@ async function loginUser() {
         .catch(console.error);
 }
 
-loginUser();
+
 
 async function getMessages() {
     fetch(`${BASE}/users/me`, {
@@ -55,15 +54,4 @@ async function getMessages() {
           .catch(console.error);
 }
 
-getMessages();
 
-async function getPosts() {
-    fetch(`${BASE}/users/posts`)
-        .then(response => response.json())
-        .then(result => {
-        console.log(result);
-        })
-        .catch(console.error);
-}
-
-getPosts();

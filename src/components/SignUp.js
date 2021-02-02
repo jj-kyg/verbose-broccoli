@@ -1,4 +1,5 @@
-import React from 'react'
+import { useState } from 'react'
+import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,26 +9,27 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import './login.css';
 
-const SignUp = () => {
-    const [open, setOpen] = React.useState(false);
+const SignUp = ({
+    registerUser
+}) => {
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-    const handleClose = () => {
-      setOpen(false);
-    };
+    const [value, setValue] = useState('');
+    const [passwordValue, setPasswordValue] = useState('');
+    const [open, setOpen] = useState(false);
+
     return (
         <div className="sign-up-container">
             <Button 
                 variant="outlined" 
                 color="primary" 
-                onClick={handleClickOpen}>
-                Test SignUp Modal
+                onClick={() => {
+                    setOpen(true);
+                }}>
+                SignUp
             </Button>
             <Dialog className='sign-up-modal-backdrop'
                 open={open} 
-                onClose={handleClose}
+                onClose={() => setOpen(false)}
                 PaperProps={{
                     style: {
                     backgroundColor: '#ef1a56ff',
@@ -44,6 +46,8 @@ const SignUp = () => {
                 id="Username"
                 label="Desired Username"
                 type="text"
+                value={value}
+                onChange={(event) => setValue(event.target.value)}
                 fullWidth
             />
             <TextField
@@ -51,18 +55,24 @@ const SignUp = () => {
                 label="Desired Password"
                 type="text"
                 fullWidth
+                value={passwordValue}
+                onChange={(event) => setPasswordValue(event.target.value)}
+                
             />
             </DialogContent>
             <DialogActions>
                 <Button 
-                    onClick={handleClose} 
+                    onClick={() => setOpen(false)} 
                     color="primary">
                     Cancel
                 </Button>
                 <Button 
-                    onClick={handleClose} 
+                    onClick={() => {
+                        setOpen(false);
+                        registerUser(value, passwordValue);
+                    }} 
                     color="primary">
-                    Login
+                    <Link to="/">Sign Up</Link>
                 </Button>
             </DialogActions>
             </Dialog>
