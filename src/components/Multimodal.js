@@ -6,6 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import UserPosts from './UserPosts.js'
 import { shadows } from '@material-ui/system';{/*can i use this to set box shadows on modals? */}
 import './multimodal.css';
 
@@ -24,18 +25,12 @@ const Multimodal = () => {
 
     return (
         <div className="multimodal">      
-            <Button 
-                variant="outlined" 
-                color="primary" 
-                onClick={handleClickOpen}>
-                open multiModal
-            </Button>
             <Dialog className='multimodal-backdrop'
                 open={open} 
                 onClose={handleClose}
                 PaperProps={{
                     style: {
-                    backgroundColor: '#ef1a56ff',
+                    backgroundColor:  '#2eb0dcff',
                     boxShadow: '5px, solid, green',
                     },
                 }}
@@ -47,33 +42,12 @@ const Multimodal = () => {
             </DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    Posts or messages would be here
+                    <UserPosts />
                 </DialogContentText>
-            <TextField
-                autoFocus
-                id="Username"
-                label="Username"
-                type="text"
-                fullWidth
-            />
-            <TextField
-                id="Password"
-                label="Password"
-                type="password"
-                fullWidth
-            />
+            
             </DialogContent>
             <DialogActions>
-                <Button 
-                    onClick={handleClose} 
-                    color="primary">
-                    Cancel
-                </Button>
-                <Button 
-                    onClick={handleClose} 
-                    color="primary">
-                    Login
-                </Button>
+
             </DialogActions>
             </Dialog>       
         </div>

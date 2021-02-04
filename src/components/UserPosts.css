@@ -1,21 +1,19 @@
-.post {
+
+.post-container{
+    height: 300px;
+    width: 100%;
+    overflow-y: auto;
+    background-color: rgb(41, 127, 197);
+    color:  #f9f2f0ff;
+    padding: 5px;
     display: grid;
-    grid-template-columns: 1fr 60% 1fr;
-    grid-template-rows: 1fr;
-    color: whitesmoke;
+    border-radius: 5px;
 }
-
-#border {
-    border: 1px solid #4877ce;
-    border-radius: 4px;
-    padding: 10px;
-}
-
-#post-info {
-    grid-column: 2;
-    border: 5px solid rgb(222, 21, 9);;
-    border-radius: 10px;
-    padding: 15px;
-    background-color: rgb(14, 55, 98, .7);
-    box-shadow: 5px 10px 5px rgb(61, 17, 219);
+.post-title{
+    text-align: center;
+    text-decoration: underline;
+    background-color:  #2eb0dcff;
+    padding: 5px;
+    margin-top: -5px;
+    width: auto;
 }

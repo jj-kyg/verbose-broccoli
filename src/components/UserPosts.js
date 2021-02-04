@@ -28,32 +28,35 @@ const UserPosts = ({
     return (
         <Container maxWidth="md">
             {
-               <div>
+               <div className='post-container'>
                    {posts.map((post, idx) => {
                         return (
                             <>
                                 { loggedIn 
                                     ?   <div key={idx}>
-                                            <h1>{post.title}</h1> {/* post title */}
-                                            <h3>{post.description}</h3> {/* post description */}
-                                            <h3>{post.price}</h3> {/* price */}
-                                            <h2>{post.author.username}</h2> {/* username */}
-                                            <h3>{post.location}</h3> {/* username */}
+                                            <h1 className='post-title'>{post.title}</h1> {/* post title */}
+                                            <h3 className='post-description'>{post.description}</h3> {/* post description */}
+                                            <h3 className='post-price'>Price: {post.price}</h3> {/* price */}
+                                            <h3 className='post-author'>Seller: {post.author.username}</h3> {/* username */}
+                                            <h3 className='post-location'>Location:{post.location}</h3> {/* username */}
+                                            
                                             <div>      
                                                 <Button 
                                                     variant="outlined" 
                                                     color="primary" 
                                                     onClick={() => console.log("Test")}>
                                                     Send Message
-                                                </Button>      
+                                                </Button> 
+                                                <hr />     
                                             </div>
                                         </div>
                                     :   <div key={idx}>
-                                            <h1>{post.title}</h1> {/* post title */}
-                                            <h3>{post.description}</h3> {/* post description */}
-                                            <h3>{post.price}</h3> {/* price */}
-                                            <h2>{post.author.username}</h2> {/* username */}
-                                            <h3>{post.location}</h3> {/* username */}
+                                            <h1 className="post-title">{post.title}</h1> {/* post title */}
+                                            <h3 className="post-description">{post.description}</h3> {/* post description */}
+                                            <h3 className="post-price">Price: {post.price}</h3> {/* price */}
+                                            <h3 className="post-author">Seller: {post.author.username}</h3> {/* username */}
+                                            <h3 className="post-location">Location: {post.location}</h3> {/* username */}
+                                            
                                             <div>      
                                                 <Button 
                                                     variant="outlined" 
@@ -61,6 +64,7 @@ const UserPosts = ({
                                                     onClick={() => setOpen(true)}>
                                                     Send Message
                                                 </Button>
+                                                <hr />
                                                 <Dialog
                                                     open={open} 
                                                     onClose={() => setOpen(false)}
