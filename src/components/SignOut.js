@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import './login.css';
+import { clearToken } from '../auth';
 
 const SignOut = ({
-    setLoggedIn
+    setLoggedIn,
+    setCurrentUser
 }) => {
 
     return (
@@ -14,6 +16,8 @@ const SignOut = ({
                 color="primary" 
                 onClick={() => {
                     setLoggedIn(false);
+                    clearToken();
+                    setCurrentUser('');
                 }}>
                 <Link to="/">Sign Out</Link>
             </Button>

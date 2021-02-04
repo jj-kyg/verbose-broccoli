@@ -21,6 +21,11 @@ export async function registerUser(username, password) {
 }
 
 export async function loginUser(username, password) {
+  const storeToken = (param) => {
+    localStorage.setItem('token', JSON.stringify(param));
+  }
+
+  console.log(username, password)
     fetch(`${BASE}/users/login`, {
         method: "POST",
         headers: {
@@ -35,23 +40,15 @@ export async function loginUser(username, password) {
       }).then(response => response.json())
         .then(result => {
           console.log(result);
+          const token = result.data.token;
+          console.log(token);
+          storeToken(token);
         })
         .catch(console.error);
 }
 
 
 
-async function getMessages() {
-    fetch(`${BASE}/users/me`, {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE3MTdkOWJhMDNmZTAwMTcxYWI5NzAiLCJ1c2VybmFtZSI6InN1cGVybWFuMjciLCJpYXQiOjE2MTIxNDg5MDR9.2puLkPNHqxjsxe8AE4Mo96s1PtxTQQLfqypj7uiVf7g'
-          },
-        }).then(response => response.json())
-          .then(result => {
-            console.log(result);
-          })
-          .catch(console.error);
-}
+
 
 

@@ -9,10 +9,14 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { shadows } from '@material-ui/system';{/*can i use this to set box shadows on modals? */}
 import './login.css';
+import { getToken } from '../auth';
+
 
 const Login = ({
     setLoggedIn,
-    loginUser
+    loginUser,
+    currentUser,
+    setCurrentUser
 }) => {
 
     const [open, setOpen] = useState(false);
@@ -62,7 +66,7 @@ const Login = ({
                 type="password"
                 fullWidth
                 value={passwordValue}
-                onChange={(event) => setPasswordValue(event.target.passwordValue)}
+                onChange={(event) => setPasswordValue(event.target.value)}
                 
             />
             </DialogContent>
@@ -75,8 +79,10 @@ const Login = ({
                 <Button 
                     onClick={() => {
                         setOpen(false);
-                        setLoggedIn(true);
-                        loginUser(value, passwordValue);
+                        setCurrentUser(getToken());
+                        const currentUser = getToken();
+                        {loginUser(value, passwordValue) ? setLoggedIn(true) : setLoggedIn(false)};
+                        console.log(currentUser);
                     }} 
                     color="primary">
                     <Link to="/loggedin">Login</Link>
