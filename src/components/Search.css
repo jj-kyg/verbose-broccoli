@@ -13,7 +13,7 @@
 }
 
 #go {
-    border: none;
+  
     border-radius: 4px;
     width: 15%;
     padding: 10px;
@@ -25,7 +25,7 @@
 }
 
 fieldset {
-    border: none;
+    
     border-radius: 6px;
     color: rgb(222, 21, 9);
     font-family: 'Courier New', Courier, monospace;
@@ -34,7 +34,7 @@ fieldset {
     
 }
 input[type=text] {
-    border: none;
+ 
     border-radius: 6px;
     background-color: transparent;
     padding: 10px;
@@ -42,10 +42,6 @@ input[type=text] {
     color: #f9f2f0ff;
     font-size: 20px;
     padding-left: 38px;
-}
-
-.no-outline:focus {
-    outline: none;
 }
 
 #search-icon {

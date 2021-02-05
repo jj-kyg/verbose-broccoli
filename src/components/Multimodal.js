@@ -6,7 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import UserPosts from './UserPosts.js'
+import Messages from './Messages';
 import { shadows } from '@material-ui/system';{/*can i use this to set box shadows on modals? */}
 import './multimodal.css';
 
@@ -24,7 +24,13 @@ const Multimodal = () => {
     };
 
     return (
-        <div className="multimodal">      
+        <div className="multimodal">   
+              <Button 
+                variant="contained" 
+                color="#ef1a56ff" 
+                onClick={() => setOpen(true)}>
+               Messages
+            </Button> 
             <Dialog className='multimodal-backdrop'
                 open={open} 
                 onClose={handleClose}
@@ -38,11 +44,11 @@ const Multimodal = () => {
             <DialogTitle 
                 id="multimodal-title"
             >
-                multimodal
+               Messages
             </DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    <UserPosts />
+                    <Messages />
                 </DialogContentText>
             
             </DialogContent>

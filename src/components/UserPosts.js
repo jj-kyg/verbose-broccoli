@@ -9,10 +9,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 const UserPosts = ({
     loggedIn
 }) => {
-
     const [open, setOpen] = useState(false);
     const [posts, setPosts] = useState([]);
-
     useEffect(() => {
         fetch(`https://strangers-things.herokuapp.com/api/2010-LSU-RM-WEB-PT/posts`)
             .then(response => response.json())
@@ -23,8 +21,6 @@ const UserPosts = ({
             })
             .catch(console.error);
     }, []);
-    
-    
     return (
         <Container maxWidth="md">
             {
@@ -34,11 +30,11 @@ const UserPosts = ({
                             <>
                                 { loggedIn 
                                     ?   <div key={idx}>
-                                            <h1 className='post-title'>{post.title}</h1> {/* post title */}
-                                            <h3 className='post-description'>{post.description}</h3> {/* post description */}
-                                            <h3 className='post-price'>Price: {post.price}</h3> {/* price */}
-                                            <h3 className='post-author'>Seller: {post.author.username}</h3> {/* username */}
-                                            <h3 className='post-location'>Location:{post.location}</h3> {/* username */}
+                                            <h1 className='post-title'>{post.title}</h1>
+                                            <h3 className='post-description'>{post.description}</h3>
+                                            <h3 className='post-price'>Price: {post.price}</h3>
+                                            <h3 className='post-author'>Seller: {post.author.username}</h3>
+                                            <h3 className='post-location'>Location:{post.location}</h3>
                                             
                                             <div>      
                                                 <Button 
@@ -51,11 +47,11 @@ const UserPosts = ({
                                             </div>
                                         </div>
                                     :   <div key={idx}>
-                                            <h1 className="post-title">{post.title}</h1> {/* post title */}
-                                            <h3 className="post-description">{post.description}</h3> {/* post description */}
-                                            <h3 className="post-price">Price: {post.price}</h3> {/* price */}
-                                            <h3 className="post-author">Seller: {post.author.username}</h3> {/* username */}
-                                            <h3 className="post-location">Location: {post.location}</h3> {/* username */}
+                                            <h1 className="post-title">{post.title}</h1>
+                                            <h3 className="post-description">{post.description}</h3>
+                                            <h3 className="post-price">Price: {post.price}</h3>
+                                            <h3 className="post-author">Seller: {post.author.username}</h3>
+                                            <h3 className="post-location">Location: {post.location}</h3>
                                             
                                             <div>      
                                                 <Button 
