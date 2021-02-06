@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import {
     BrowserRouter as Router,
@@ -10,7 +10,6 @@ import {
 
 import { 
     Header,
-    Search,
     UserPosts,
     Login, 
     SignUp,
@@ -49,11 +48,11 @@ const App = () => {
                         {
                             loggedIn 
                             ?   <div className="posts-div">
-                                    <Search />
+                                    {/* <Search /> */}
                                     <MyPosts />
                                 </div> 
                             :   <div>
-                                    <Search /> 
+                                    {/* <Search />  */}
                                     <UserPosts loggedIn={loggedIn} />
                                 </div>
                         }
