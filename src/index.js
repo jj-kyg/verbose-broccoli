@@ -41,7 +41,6 @@ const App = () => {
                                 {loggedIn ? <CreatePost setRender={setRender} loggedIn={loggedIn} username={username} /> : ''}
                                 {loggedIn ? '' : <SignUp registerUser={registerUser}/>}
                                 {loggedIn ? <SignOut setRender={setRender} setCurrentUser={setCurrentUser} setLoggedIn={setLoggedIn}/> : ''}
-                                <Multimodal />
                             </div>
                         </div>
                         {
