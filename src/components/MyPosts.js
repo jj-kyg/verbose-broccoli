@@ -2,15 +2,17 @@ import './MyPosts.css';
 import './Search.css';
 import { getToken } from '../auth';
 import { useState, useEffect } from 'react';
-import { Grid, Tabs, Tab, Container, TextField, FormControlLabel, Checkbox, Button, Dialog, DialogContent, DialogActions } from '@material-ui/core';
+import {Badge, Grid, Tabs, Tab, Container, TextField, FormControlLabel, Checkbox, Button, Dialog, DialogContent, DialogActions, DialogContentText } from '@material-ui/core';
 import { editPost, deletePost, sendMessage } from '../api';
 import SearchIcon from '@material-ui/icons/Search';
+import MailIcon from '@material-ui/icons/Mail';
 
 const MyPosts = () => {
 
     const [posts, setPosts] = useState([]);
     const [strangersPosts, setStrangersPosts] = useState([]);
     const [open, setOpen] = useState(false);
+    const [messageOpen, setMessageOpen] = useState(false);
     const [clickedPost, setClickedPost] = useState();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -21,6 +23,7 @@ const MyPosts = () => {
     const [value, setValue] = useState(0);
     const [message, setMessage] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
+    const [filteredPosts, setFilteredPosts] = useState([]);
 
     useEffect(() => {
         const token = getToken();
@@ -33,7 +36,7 @@ const MyPosts = () => {
           .then(result => {
             console.log(result);
             setPosts(result.data.posts);
-            console.log(result.data.posts);
+            setFilteredPosts(result.data.posts)
           })
           .catch(console.error);
     }, []);
@@ -97,7 +100,14 @@ const MyPosts = () => {
                 <Tab label="Stranger's Posts"></Tab>
             </Tabs>
             <TabPanel value={value} index={0}><div className="MyPosts-container">
-                            {posts.map((post, idx) => {
+                            
+                            {filteredPosts.filter((post) => {
+                                if(searchTerm == ''){
+                                    return post
+                                }else if(post.title.toLowerCase().includes(searchTerm.toLowerCase())){
+                                    return post
+                                }
+                            }).map((post, idx) => {
                                 return (
                                     <>
                                         <div key={idx}>
@@ -119,17 +129,6 @@ const MyPosts = () => {
                                                         setClickedPost(post);
                                                     }}>
                                                     Edit Post
-                                                </Button>
-                                                <Button 
-                                                    variant="outlined" 
-                                                    color="secondary" 
-                                                    onClick={() => {
-                                                        console.log(post);
-                                                        setClickedPost(post);
-                                                        deletePost(post._id);
-                                                        alert("Post Deleted!");
-                                                    }}>
-                                                    Delete Post
                                                 </Button>
                                                 <Dialog className='login-modal-backdrop'
                                                     open={open} 
@@ -204,7 +203,66 @@ const MyPosts = () => {
                                                             Edit
                                                         </Button>
                                                     </DialogActions>
-                                                    </Dialog>   
+                                                    </Dialog>  
+                                                <Button 
+                                                    style={{marginRight: '5px'}}
+                                                    variant="outlined" 
+                                                    color="secondary" 
+                                                    onClick={() => {
+                                                        console.log(post);
+                                                        setClickedPost(post);
+                                                        deletePost(post._id);
+                                                        alert("Post Deleted!");
+                                                    }}>
+                                                    Delete Post
+                                                </Button>
+                                                <Button
+                                                    color="secondary" 
+                                                    onClick={() => {
+                                                        setMessageOpen(true);
+                                                        console.log('message btn');
+                                                    }}>
+                                                    <Badge 
+                                                        badgeContent={post.messages.length} 
+                                                        color="primary" 
+                                                        onClick={() => console.log(post)}>
+                                                    <MailIcon />
+                                                </Badge>
+                                                </Button>
+                                                <Dialog className='login-modal-backdrop'
+                                                    open={messageOpen} 
+                                                    onClose={() => setMessageOpen(false)}
+                                                    boxShadow={3}
+                                                    PaperProps={{
+                                                        style: {
+                                                        backgroundColor: '#ef1a56ff',
+                                                        },
+                                                    }}
+                                                    >
+                                                    <DialogContent>
+                                                        <DialogContentText>
+                                                            
+                                                                {post.messages ? post.messages.map((message) => {
+                                                                    return (
+                                                                        
+                                                                    `${message.content}`
+                                                                        
+                                                                    )
+                                                                }): 'Close this'}    
+                                                            
+                                                        </DialogContentText>
+                                                    </DialogContent>
+                                                    <DialogActions>
+                                                        <Button 
+                                                            onClick={() => {
+                                                                setMessageOpen(false);   
+                                                            }} 
+                                                            color="primary">
+                                                            Close
+                                                        </Button>
+                                                    </DialogActions>
+                                                    </Dialog>  
+                                                 
                                                 <hr />     
                                             </div>
                                         </div>
