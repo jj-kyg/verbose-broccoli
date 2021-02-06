@@ -14,7 +14,6 @@ import {
     Login, 
     SignUp,
     SignOut,
-    Multimodal,
     Footer,
     CreatePost,
     MyPosts
