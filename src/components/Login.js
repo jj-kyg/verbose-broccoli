@@ -8,6 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { shadows } from '@material-ui/system';{/*can i use this to set box shadows on modals? */}
+import './login.css';
 import { getToken } from '../auth';
 
 
@@ -25,8 +26,8 @@ const Login = ({
     return (
         <div className="login-container">      
             <Button 
-                variant="contained" 
-                color="#ef1a56ff" 
+                variant="outlined" 
+                color="primary" 
                 onClick={() => setOpen(true)}>
                 Login
             </Button>

@@ -20,8 +20,8 @@ const SignUp = ({
     return (
         <div className="sign-up-container">
             <Button 
-                variant="contained" 
-                color="#ef1a56ff" 
+                variant="outlined" 
+                color="primary" 
                 onClick={() => {
                     setOpen(true);
                 }}>

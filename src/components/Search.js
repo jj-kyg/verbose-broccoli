@@ -27,9 +27,7 @@ const Search = () => {
                       defaultValue="Search Posts"
                       label="Search Posts"
                       placeholder="Search Posts..."
-                      variant="standard" 
-                      color="#f9f2f0ff"
-                     
+                      variant="filled" /*this wont fill?*/
                       value={value}
                       onChange={(event) => setValue(event.target.value)} 
                       
