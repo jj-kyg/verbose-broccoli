@@ -1,10 +1,6 @@
 import './UserPosts.css';
 import { useState, useEffect } from 'react';
-import Container from '@material-ui/core/Container'; {/*we use container here because it is responsive*/}
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+import { Container, Button, DialogContentText, Dialog, DialogContent} from '@material-ui/core';
 
 const UserPosts = ({
     loggedIn
@@ -43,8 +39,8 @@ const UserPosts = ({
                                             <div>      
                                                 <Button 
                                                     variant="outlined" 
-                                                    color="primary" 
-                                                    onClick={() => console.log("Test")}>
+                                                    color="secondary" 
+                                                    onClick={() => console.log("What?")}>
                                                     Send Message
                                                 </Button> 
                                                 <hr />     
@@ -59,7 +55,7 @@ const UserPosts = ({
                                             
                                             <div>      
                                                 <Button 
-                                                    variant="outlined" 
+                                                    variant="filled" 
                                                     color="primary" 
                                                     onClick={() => setOpen(true)}>
                                                     Send Message

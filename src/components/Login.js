@@ -1,36 +1,61 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { purple } from '@material-ui/core/colors';
 import { shadows } from '@material-ui/system';{/*can i use this to set box shadows on modals? */}
 import './login.css';
+import { loginUser } from '../api';
 import { getToken } from '../auth';
+
 
 
 const Login = ({
     setLoggedIn,
-    loginUser,
-    currentUser,
-    setCurrentUser
+    setUsername,
+    currentUser
 }) => {
 
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
 
+    const useStyles = makeStyles((theme) => ({
+        margin: {
+            margin: theme.spacing(1),
+        },
+    }));
+
+    const theme = createMuiTheme({
+        palette: {
+          primary: purple,
+        },
+        secondary: {
+            main: '#80d8ff',
+          },
+    });
+
+    const ColorButton = withStyles((theme) => ({
+        root: {
+          fontFamily: [
+            'Courier New', 'Courier', 'monospace'
+          ].join(','),
+        },
+      }))(Button);
+
+
+    const classes = useStyles();
+
     return (
-        <div className="login-container">      
-            <Button 
-                variant="outlined" 
-                color="primary" 
-                onClick={() => setOpen(true)}>
-                Login
-            </Button>
+        <div className="login-container">
+            <ThemeProvider theme={theme}>
+                <ColorButton variant="contained" 
+                    color="primary" 
+                    className={classes.margin}
+                    onClick={() => setOpen(true)}>
+                    Login
+                </ColorButton>
+            </ThemeProvider>      
             <Dialog className='login-modal-backdrop'
                 open={open} 
                 onClose={() => setOpen(false)}
@@ -77,19 +102,27 @@ const Login = ({
                     Cancel
                 </Button>
                 <Button 
-                    onClick={() => {
+                    onClick={async () => {
+                        
                         setOpen(false);
-                        setCurrentUser(getToken());
-                        const currentUser = getToken();
-                        {loginUser(value, passwordValue) ? setLoggedIn(true) : setLoggedIn(false)};
-                        console.log(currentUser);
+                        loginUser(value, passwordValue);
+                        setTimeout(() => {
+                            let token = '';
+                            token = getToken();
+                            token ? setUsername(value) : '';
+                            token ? setLoggedIn(true) : setLoggedIn(false);
+                            console.log(token);
+                        }, 1200);
+                        
+                        
                     }} 
                     color="primary">
-                    <Link to="/loggedin">Login</Link>
+                    Login
                 </Button>
             </DialogActions>
             </Dialog>       
         </div>
     )
 }
+
 export default Login;

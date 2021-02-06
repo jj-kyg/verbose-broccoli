@@ -24,10 +24,10 @@ const Search = () => {
                 <Grid item>
                   <TextField 
                       id="search-entry" 
-                      defaultValue="Search Posts"
+                      // defaultValue="Search Posts"
                       label="Search Posts"
                       placeholder="Search Posts..."
-                      variant="filled" /*this wont fill?*/
+                      variant="outlined" 
                       value={value}
                       onChange={(event) => setValue(event.target.value)} 
                       

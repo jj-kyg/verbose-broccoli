@@ -1,11 +1,5 @@
-import {useState} from 'react'
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { useState } from 'react'
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
 import UserPosts from './UserPosts.js'
 import { shadows } from '@material-ui/system';{/*can i use this to set box shadows on modals? */}
 import './multimodal.css';
