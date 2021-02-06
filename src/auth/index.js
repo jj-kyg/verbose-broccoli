@@ -1,5 +1,9 @@
+export function storeToken(param) {
+    localStorage.setItem('token', param);
+}
+
 export function getToken() {
-    const token = JSON.parse(localStorage.getItem('token'));
+    const token = localStorage.getItem('token');
     return token;
 }
 

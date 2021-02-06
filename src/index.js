@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import {
     BrowserRouter as Router,
@@ -10,59 +10,56 @@ import {
 
 import { 
     Header,
-    Search,
     UserPosts,
     Login, 
     SignUp,
     SignOut,
-    Multimodal
+    Multimodal,
+    Footer,
+    CreatePost,
+    MyPosts
 } from './components';
 
 import {
     registerUser,
-    loginUser,
 } from './api';
-
-import {
-    getToken
-} from './auth';
 
 const App = () => {
 
     const [loggedIn, setLoggedIn] = useState(false);
+    const [username, setUsername] = useState('')
     const [currentUser, setCurrentUser] = useState();
-    const [userPosts, setUserPosts] = useState([]);
-
-    useEffect(() => {
-        fetch(`https://strangers-things.herokuapp.com/api/2010-LSU-RM-WEB-PT/users/me`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${currentUser}`
-                },
-            }).then(response => response.json())
-                .then(result => {
-                console.log("Users posts are", result);
-                })
-                .catch(console.error);
-    }, []);
+    const [render, setRender] = useState(false);
 
     return (
-        <Router>
-            <div>
-                <div className="header">
-                    <Header />
-                    <div className="header-btns">
-                        {loggedIn ? '' : <Login currentUser={currentUser} setCurrentUser={setCurrentUser} loginUser={loginUser} setLoggedIn={setLoggedIn} />}
-                        {loggedIn ? '' : <SignUp registerUser={registerUser}/>}
-                        {loggedIn ? <SignOut setCurrentUser={setCurrentUser} setLoggedIn={setLoggedIn}/> : ''}
-                        <Multimodal />
-                    </div>
-                </div>
-                    <Search />
-                    {/* logged in ? show MyPosts : '' */}
-                    <UserPosts loggedIn={loggedIn} />
+        <div>
+            <div className='Content'>
+                <Router>
+                        <div className="header">
+                            <Header />
+                            <div className="header-btns">
+                                {loggedIn ? '' : <Login currentUser={currentUser} setUsername={setUsername} setLoggedIn={setLoggedIn} />}
+                                {loggedIn ? <CreatePost setRender={setRender} loggedIn={loggedIn} username={username} /> : ''}
+                                {loggedIn ? '' : <SignUp registerUser={registerUser}/>}
+                                {loggedIn ? <SignOut setRender={setRender} setCurrentUser={setCurrentUser} setLoggedIn={setLoggedIn}/> : ''}
+                                <Multimodal />
+                            </div>
+                        </div>
+                        {
+                            loggedIn 
+                            ?   <div className="posts-div">
+                                    {/* <Search /> */}
+                                    <MyPosts />
+                                </div> 
+                            :   <div>
+                                    {/* <Search />  */}
+                                    <UserPosts loggedIn={loggedIn} />
+                                </div>
+                        }
+                </Router>
             </div>
-        </Router>
+            <Footer loggedIn={loggedIn}/>
+        </div>
     )
 }
 

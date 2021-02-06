@@ -1,12 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { purple } from '@material-ui/core/colors';
 import './login.css';
 
 const SignUp = ({
@@ -17,16 +13,42 @@ const SignUp = ({
     const [passwordValue, setPasswordValue] = useState('');
     const [open, setOpen] = useState(false);
 
+    const useStyles = makeStyles((theme) => ({
+        margin: {
+            margin: theme.spacing(1),
+        },
+    }));
+
+    const ColorButton = withStyles((theme) => ({
+        root: {
+          fontFamily: [
+            'Courier New', 'Courier', 'monospace'
+          ].join(','),
+        },
+      }))(Button);
+
+    const theme = createMuiTheme({
+        palette: {
+          primary: purple,
+        },
+        secondary: {
+            main: '#80d8ff',
+          },
+      });
+
+
+    const classes = useStyles();
+
     return (
         <div className="sign-up-container">
-            <Button 
-                variant="outlined" 
-                color="primary" 
-                onClick={() => {
-                    setOpen(true);
-                }}>
-                SignUp
-            </Button>
+            <ThemeProvider theme={theme}>
+                <ColorButton variant="contained" 
+                    color="primary" 
+                    className={classes.margin}
+                    onClick={() => setOpen(true)}>
+                    Sign Up
+                </ColorButton>
+            </ThemeProvider> 
             <Dialog className='sign-up-modal-backdrop'
                 open={open} 
                 onClose={() => setOpen(false)}

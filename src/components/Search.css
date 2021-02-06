@@ -3,13 +3,14 @@
     grid-template-columns: 1fr 50% 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     height: 100px;
+    grid-area: search;
 }
 
 #search {
     display: grid;
     grid-column: 2;
     grid-row: 1;
-    background-color: rgba(189, 196, 202, 0.5);
+    background-color: rgba(189, 196, 202);
 }
 
 #go {
@@ -30,7 +31,7 @@ fieldset {
     color: rgb(222, 21, 9);
     font-family: 'Courier New', Courier, monospace;
     font-size: 20px;
-    background-color: rgb(14, 55, 98, .3);
+    background-color: rgb(14, 55, 98, .8);
     
 }
 input[type=text] {
@@ -39,7 +40,7 @@ input[type=text] {
     background-color: transparent;
     padding: 10px;
     width: 70%;
-    color: #f9f2f0ff;
+    color: white;
     font-size: 20px;
     padding-left: 38px;
 }

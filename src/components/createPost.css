@@ -1,0 +1,14 @@
+.username {
+    margin-right: 5px;
+    display: inline;
+    position: relative;
+    font: 40px monospace;
+    letter-spacing: 1px;
+    color: #f9f2f0ff;
+}
+.username:after {
+    content: "Welcome";
+    position: absolute; left:2px; top: 1px;
+    color: rgba(244,0,87,0.9);   
+}
+
