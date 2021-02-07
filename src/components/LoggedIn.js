@@ -1,19 +1,22 @@
-import './MyPosts.css';
 import './Search.css';
+import './loggedIn.css';
 import { getToken } from '../auth';
 import { useState, useEffect } from 'react';
-import {Badge, Grid, Tabs, Tab, Container, TextField, FormControlLabel, Checkbox, Button, Dialog, DialogContent, DialogActions, DialogContentText } from '@material-ui/core';
+import {Badge, Grid, Tabs, Tab, Container, TextField, FormControlLabel, Checkbox, Button, Dialog, DialogContent, DialogActions } from '@material-ui/core';
 import { editPost, deletePost, sendMessage } from '../api';
 import SearchIcon from '@material-ui/icons/Search';
 import MailIcon from '@material-ui/icons/Mail';
 
-const MyPosts = ({add}) => {
+const MyPosts = ({
+    add,
+    setAdd
+}) => {
 
     const [posts, setPosts] = useState([]);
     const [strangersPosts, setStrangersPosts] = useState([]);
     const [open, setOpen] = useState(false);
     const [messageOpen, setMessageOpen] = useState(false);
-    const [clickedPost, setClickedPost] = useState();
+    const [clickedPost, setClickedPost] = useState([]);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
@@ -24,6 +27,8 @@ const MyPosts = ({add}) => {
     const [message, setMessage] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredPosts, setFilteredPosts] = useState([]);
+    const [msg, setMsg] = useState(false);
+    const [editSubmit, setEditSubmit] = useState(false);
 
     console.log(add);
 
@@ -53,6 +58,7 @@ const MyPosts = ({add}) => {
             })
             .catch(console.error);
     },[add]);
+
     const TabPanel = (props) => {
         const {children, value, index} = props;
         return (
@@ -62,6 +68,7 @@ const MyPosts = ({add}) => {
             </div> 
         )
     }
+
     return (
         <>
             <div className="search">
@@ -74,7 +81,7 @@ const MyPosts = ({add}) => {
                         <Grid item>
                         <SearchIcon
                             fontSize="large"
-                            color="secondary" 
+                            style={{color: 'whitesmoke'}} 
                         />
                         </Grid>
                     </div>
@@ -98,11 +105,13 @@ const MyPosts = ({add}) => {
                 setValue(val);
             }}>
                 <Tab 
-                    label="My Posts"    
+                    label="My Posts"
+                    style={{color: 'whitesmoke'}}   
                 >
                 </Tab>
                 <Tab 
-                label="Stranger's Posts"
+                    label="Stranger's Posts"
+                    style={{color: 'whitesmoke'}} 
                 >
                 </Tab>
             </Tabs>
@@ -120,26 +129,45 @@ const MyPosts = ({add}) => {
                             }).map((post, idx) => {
                                 return (
                                     <>
-                                        <div key={idx}>
-                                            <h1 className='post-title'>{post.title}</h1> 
-                                            <h3 className='post-description'>{post.description}</h3> 
-                                            <h3 className='post-price'>Price: {post.price}</h3> 
-                                            <h3 className='post-author'>Seller: {post.author.username}</h3> 
-                                            <h3 className='post-location'>Location:{post.location}</h3> 
-                                            {post.active ? '' : <h3 style={{color: 'red'}}>This post has been deleted</h3>}
-                                            <div>      
-                                                <Button
-                                                    style={{marginRight: '5px'}}
-                                                    variant="outlined" 
-                                                    color="#021b27ff" 
-                                                    onClick={() => {
-                                                        setOpen(true);
-                                                        console.log(post._id);
-                                                        setId(post._id);
-                                                        setClickedPost(post);
-                                                    }}>
-                                                    Edit Post
-                                                </Button>
+                                        <div className='edit'>
+                                            <p id="title"><input type="text" id={idx} value={post.title} onChange={(event) => setTitle(event.target.value)} /></p>
+                                            <p id="description"><input type="text" id={idx} value={post.description} onChange={(event) => setDescription(event.target.value)} /></p>
+                                            <p id="description"><input type="text" id={idx} value={post.price} onChange={(event) => setPrice(event.target.value)} /></p>
+                                            <p id="location"><input type="text" id={idx} value={post.location} onChange={(event) => setLocation(event.target.value)} /></p>
+                                            {post.active ? '' : <h3 style={{color: '#f50057'}}>POST DELETED</h3>}
+                                            <div>  
+                                                {   editSubmit ?
+                                                    ''
+                                                    :
+                                                    <Button
+                                                        style={{marginRight: '5px'}}
+                                                        variant="contained" 
+                                                        color="primary"
+                                                        onClick={() => {
+                                                            setOpen(true);
+                                                            console.log(post._id);
+                                                            setId(post._id);
+                                                            setClickedPost(post);
+                                                            setEditSubmit(true);
+                                                        }}>
+                                                        Edit Post
+                                                    </Button>
+                                                }
+                                                { 
+                                                    editSubmit ?
+                                                    <Button
+                                                        style={{marginRight: '5px'}}
+                                                        variant="contained" 
+                                                        color="primary"
+                                                        onClick={() => {
+                                                            setOpen(false);
+                                                            setEditSubmit(false);
+                                                            editPost(title, description, price, location, checked, id);
+                                                        }}>
+                                                        Submit Edited Post
+                                                    </Button>
+                                                    : ''
+                                                }
                                                 <Dialog className='login-modal-backdrop'
                                                     open={open} 
                                                     onClose={() => setOpen(false)}
@@ -151,74 +179,28 @@ const MyPosts = ({add}) => {
                                                     }}
                                                     >
                                                     <DialogContent>
-                                                    <TextField
-                                                        autoFocus
-                                                        id="Title"
-                                                        label="Title"
-                                                        type="text"
-                                                        fullWidth
-                                                        value={title}
-                                                        onChange={(event) => setTitle(event.target.value)}   
-                                                    />
-                                                    <TextField
-                                                        autoFocus
-                                                        id="Description"
-                                                        label="Description"
-                                                        type="text"
-                                                        fullWidth
-                                                        value={description}
-                                                        onChange={(event) => setDescription(event.target.value)} 
-                                                    />
-                                                    <TextField
-                                                        autoFocus
-                                                        id="Price"
-                                                        label="Price"
-                                                        type="text"
-                                                        fullWidth
-                                                        value={price}
-                                                        onChange={(event) => setPrice(event.target.value)}  
-                                                    />
-                                                    <TextField
-                                                        autoFocus
-                                                        id="Location"
-                                                        label="Location"
-                                                        type="text"
-                                                        fullWidth
-                                                        value={location}
-                                                        onChange={(event) => setLocation(event.target.value)} 
-                                                    />
-                                                    <FormControlLabel
-                                                        control={
-                                                            <Checkbox
-                                                                checked={checked}
-                                                                onChange={(event) => setChecked(event.target.checked)}
-                                                                name="deliver"
-                                                                color="primary"
-                                                            />
-                                                        }
-                                                        label="Willing to Deliver?"
-                                                    />
+                                                        Click on Text of Post to Edit!
                                                     </DialogContent>
                                                     <DialogActions>
                                                         <Button 
                                                             onClick={() => {
                                                                 setOpen(false);
-                                                                editPost(title, description, price, location, checked, id);
                                                             }} 
                                                             color="primary">
-                                                            Edit
+                                                            Close
                                                         </Button>
                                                     </DialogActions>
                                                     </Dialog>  
                                                 <Button 
                                                     style={{marginRight: '5px'}}
-                                                    variant="outlined" 
-                                                    color="#021b27ff" 
+                                                    variant="contained" 
+                                                    color="primary" 
                                                     onClick={() => {
                                                         console.log(post);
                                                         setClickedPost(post);
                                                         deletePost(post._id);
                                                         alert("Post Deleted!");
+                                                        setAdd(Math.random() * 5);
                                                     }}>
                                                     Delete Post
                                                 </Button>
@@ -247,10 +229,10 @@ const MyPosts = ({add}) => {
                                                     }}
                                                     >
                                                     <DialogContent>
-                                                                {clickedPost ? clickedPost.messages.map((message) => {
+                                                                {clickedPost.length != 0 ? clickedPost.messages.map((message) => {
                                                                     return (
                                                                     <>
-                                                                    <div>From: {message.fromUser.userName}</div>
+                                                                    <div>From: {message.fromUser.username}</div>
                                                                     <div>Message: {message.content}</div>
                                                                     <div>Time: {clickedPost.updatedAt}</div>
                                                                     <hr/>
@@ -283,7 +265,59 @@ const MyPosts = ({add}) => {
                 >
                 {
                 <div className='gridbox'>
-                    {strangersPosts.filter((post) => {
+
+                {   msg ?
+                    
+                        <>
+                            <div>
+                                <h1 className='post-title'>{clickedPost.title}</h1> 
+                                <h3 className='post-description'>{clickedPost.description}</h3> 
+                                <h3 className='post-price'>Price: {clickedPost.price}</h3> 
+                                <h3 className='post-author'>Seller: {clickedPost.author.username}</h3> 
+                                <h3 className='post-location'>Location:{clickedPost.location}</h3>
+                                <TextField
+                                    autoFocus
+                                    id="Message"
+                                    label="Message"
+                                    type="text"
+                                    fullWidth
+                                    value={message}
+                                    onChange={(event) => {
+                                        setMessage(event.target.value);
+                                    }}
+                                    
+                                />
+                                <Button 
+                                    onClick={() => {
+                                        sendMessage(id, message);
+                                        alert("Message Sent!");
+                                        setMsg(false);
+                                    }} 
+                                    color="primary">
+                                    Send
+                                </Button> 
+                                <div>      
+                                    { 
+                                        msg ?
+                                            ''
+                                        : <Button 
+                                                variant="contained" 
+                                                color="primary" 
+                                                onClick={() => {
+                                                    setId(post._id); 
+                                                    setMsg(true); 
+                                                    setClickedPost(post);
+                                                    
+                                                }}>
+                                                Send Message
+                                            </Button> 
+                                    }
+                                    <hr />     
+                                </div>
+                            </div>
+                        </>
+ 
+                    : strangersPosts.filter((post) => {
                                 if (searchTerm == '') {
                                     return post
                                 } else if (post.title.toLowerCase().includes(searchTerm.toLowerCase())) {
@@ -301,54 +335,28 @@ const MyPosts = ({add}) => {
                                         <h3 className='post-author'>Seller: {post.author.username}</h3> 
                                         <h3 className='post-location'>Location:{post.location}</h3>
                                         <div>      
-                                            <Button 
-                                                variant="contained" 
-                                                color="secondary" 
-                                                onClick={() => {
-                                                    setOpen(true);
-                                                    setId(post._id); 
-                                                }}>
-                                                Send Message
-                                            </Button> 
-                                            <Dialog className='login-modal-backdrop'
-                                                    open={open} 
-                                                    onClose={() => setOpen(false)}
-                                                    boxShadow={3}
-                                                    PaperProps={{
-                                                        style: {
-                                                        backgroundColor: '#ef1a56ff',
-                                                        },
-                                                    }}
-                                                    >
-                                                    <DialogContent>
-                                                    <TextField
-                                                        autoFocus
-                                                        id="Message"
-                                                        label="Message"
-                                                        type="text"
-                                                        fullWidth
-                                                        value={message}
-                                                        onChange={(event) => {
-                                                            setMessage(event.target.value);
-                                                        }}
-                                                        
-                                                    />
-                                                    <Button 
-                                                            onClick={() => {
-                                                                setOpen(false);
-                                                                sendMessage(id, message);
-                                                            }} 
-                                                            color="primary">
-                                                            Send
-                                                    </Button>
-                                                    </DialogContent>
-                                                </Dialog>
+                                            { 
+                                                msg ?
+                                                    ''
+                                                : <Button 
+                                                        variant="contained" 
+                                                        color="primary" 
+                                                        onClick={() => {
+                                                            setId(post._id); 
+                                                            setMsg(true); 
+                                                            setClickedPost(post);
+                                                            
+                                                        }}>
+                                                        Send Message
+                                                    </Button> 
+                                            }
                                             <hr />     
                                         </div>
                                     </div>
                                 </>
                             )
-                    })}
+                    })
+                }
                 </div> 
                 }</TabPanel>
             </Container>

@@ -1,7 +1,6 @@
 import AddIcon from '@material-ui/icons/Add';
 import { Checkbox, Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel } from '@material-ui/core';
 import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import './createPost.css';
 import { useState, useEffect } from 'react';
 import { getToken } from '../auth'
 import { createNewPost } from '../api';
@@ -32,7 +31,7 @@ const CreatePost = ({
           }
         },
         secondary: {
-            main: '#e737a7ff',
+            main: 'rgb(228, 54, 164)',
           },
     })
     const ColorButton = withStyles((theme) => ({
@@ -72,7 +71,9 @@ const CreatePost = ({
                     <ColorButton variant="contained" 
                         color="primary" 
                         className={classes.margin}
-                        onClick={() => setOpen(true)}>
+                        onClick={() => {
+                            setOpen(true);
+                        }}>
                         <AddIcon />  Add New Post
                     </ColorButton>
                 </ThemeProvider>      
@@ -154,7 +155,7 @@ const CreatePost = ({
                         onClick={() => {
                             setOpen(false);
                             createNewPost(title, description, price, location, checked);
-                            setAdd(Math.floor(Math.random() * 10));
+                            setAdd(Math.floor(Math.random() * 10) + 1);
                             alert(`${title} is now posted!`);
                         }} 
                         color="primary">

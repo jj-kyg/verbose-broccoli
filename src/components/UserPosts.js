@@ -34,7 +34,7 @@ const UserPosts = ({
                         <Grid item>
                         <SearchIcon 
                             fontSize="large"
-                            color="secondary"
+                            style={{color: 'whitesmoke'}} 
                         />
                         </Grid>
                     </div>
@@ -42,7 +42,7 @@ const UserPosts = ({
                         <TextField 
                             id="search-entry" 
                             placeholder="Search Posts..."
-                            variant="outlined" 
+                            variant="outlined"
                             value={searchTerm}
                             onChange={(event) => setSearchTerm(event.target.value)} 
                         />
@@ -72,8 +72,8 @@ const UserPosts = ({
                                                 
                                                 <div>      
                                                     <Button 
-                                                        variant="outlined" 
-                                                        color="secondary" 
+                                                        variant="contained" 
+                                                        color="secondary"
                                                         onClick={() => console.log("What?")}>
                                                         Send Message
                                                     </Button> 
@@ -89,8 +89,8 @@ const UserPosts = ({
                                                 
                                                 <div>      
                                                     <Button 
-                                                        variant="filled" 
-                                                        color="primary" 
+                                                        variant="contained" 
+                                                        color="primary"
                                                         onClick={() => setOpen(true)}>
                                                         Send Message
                                                     </Button>
@@ -110,6 +110,10 @@ const UserPosts = ({
                                                         Please log in to send message
                                                         </DialogContentText>
                                                     </DialogContent>
+                                                    <Button 
+                                                        onClick={() => setOpen(false)}>
+                                                        Close
+                                                    </Button>
                                                     </Dialog>       
                                                 </div>    
                                             </div>  

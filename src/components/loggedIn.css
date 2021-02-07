@@ -1,0 +1,37 @@
+#title input {
+    background-color: rgb(47, 93, 110);
+    border: none;
+    font-size: 30px;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    color: rgb(2, 27, 39);
+    outline: none;
+}
+
+#description input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: rgb(2, 27, 39);
+    font-size: 19px;
+}
+
+#price input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: rgb(2, 27, 39);
+    font-size: 19px;
+}
+
+#location input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: rgb(2, 27, 39);
+    font-size: 19px;
+}

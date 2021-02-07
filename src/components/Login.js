@@ -37,7 +37,8 @@ const Login = ({
     return (
         <div className="login-container">
             <ThemeProvider theme={theme}>
-                <ColorButton variant="contained" 
+                <ColorButton 
+                    variant="contained" 
                     color="primary" 
                     className={classes.margin}
                     onClick={() => setOpen(true)}>
@@ -57,6 +58,7 @@ const Login = ({
                 >
             <DialogTitle 
                 id="login-modal-title"
+                style={{color: 'rgb(66, 90, 180)'}}
             >
                 Sign In
             </DialogTitle>

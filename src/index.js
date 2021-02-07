@@ -3,9 +3,6 @@ import { useState } from 'react';
 
 import {
     BrowserRouter as Router,
-    Route,
-    Link,
-    Switch
 } from 'react-router-dom'
 
 import { 
@@ -14,9 +11,8 @@ import {
     Login, 
     SignUp,
     SignOut,
-    Footer,
     CreatePost,
-    MyPosts
+    LoggedIn
 } from './components';
 
 import {
@@ -47,7 +43,7 @@ const App = () => {
                         {
                             loggedIn 
                             ?   <div className="posts-div">
-                                    <MyPosts add={add}/>
+                                    <LoggedIn add={add} setAdd={setAdd}/>
                                 </div> 
                             :   <div>
                                     <UserPosts loggedIn={loggedIn} />
