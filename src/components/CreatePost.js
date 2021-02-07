@@ -9,7 +9,8 @@ import { createNewPost } from '../api';
 
 
 const CreatePost = ({
-    username
+    username,
+    setAdd
 }) => {
 
     const [userInfo, setUserInfo] = useState();
@@ -56,7 +57,8 @@ const CreatePost = ({
         }).then(response => response.json())
         .then(result => {
             console.log(result);
-            setUserInfo(result)
+            setUserInfo(result);
+
         })
         .catch(console.error);
     },[])
@@ -153,6 +155,8 @@ const CreatePost = ({
                         onClick={() => {
                             setOpen(false);
                             createNewPost(title, description, price, location, checked);
+                            setAdd(Math.floor(Math.random() * 10));
+                            alert(`${title} is now posted!`);
                         }} 
                         color="primary">
                         Create
