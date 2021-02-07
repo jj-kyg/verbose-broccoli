@@ -29,6 +29,7 @@ const App = () => {
     const [username, setUsername] = useState('')
     const [currentUser, setCurrentUser] = useState();
     const [render, setRender] = useState(false);
+    const [add, setAdd] = useState(0);
 
     return (
         <div>
@@ -38,7 +39,7 @@ const App = () => {
                             <Header />
                             <div className="header-btns">
                                 {loggedIn ? '' : <Login currentUser={currentUser} setUsername={setUsername} setLoggedIn={setLoggedIn} />}
-                                {loggedIn ? <CreatePost setRender={setRender} loggedIn={loggedIn} username={username} /> : ''}
+                                {loggedIn ? <CreatePost setAdd={setAdd} setRender={setRender} loggedIn={loggedIn} username={username} /> : ''}
                                 {loggedIn ? '' : <SignUp registerUser={registerUser}/>}
                                 {loggedIn ? <SignOut setRender={setRender} setCurrentUser={setCurrentUser} setLoggedIn={setLoggedIn}/> : ''}
                             </div>
@@ -46,11 +47,9 @@ const App = () => {
                         {
                             loggedIn 
                             ?   <div className="posts-div">
-                                    {/* <Search /> */}
-                                    <MyPosts />
+                                    <MyPosts add={add}/>
                                 </div> 
                             :   <div>
-                                    {/* <Search />  */}
                                     <UserPosts loggedIn={loggedIn} />
                                 </div>
                         }

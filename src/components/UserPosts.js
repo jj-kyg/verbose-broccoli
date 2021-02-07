@@ -58,7 +58,14 @@ const UserPosts = ({
             <Container maxWidth="md">
                 {
                 <div className='post-container'>
-                    {posts.map((post, idx) => {
+                    {posts.filter((post) => {
+                                if (searchTerm == '') {
+                                    return post
+                                } else if (post.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+                                    console.log(post);
+                                    return post
+                                }
+                    }).map((post, idx) => {
                             return (
                                 <>
                                     { loggedIn 

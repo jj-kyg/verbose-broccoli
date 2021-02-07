@@ -7,7 +7,7 @@ import { editPost, deletePost, sendMessage } from '../api';
 import SearchIcon from '@material-ui/icons/Search';
 import MailIcon from '@material-ui/icons/Mail';
 
-const MyPosts = () => {
+const MyPosts = ({add}) => {
 
     const [posts, setPosts] = useState([]);
     const [strangersPosts, setStrangersPosts] = useState([]);
@@ -25,6 +25,8 @@ const MyPosts = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredPosts, setFilteredPosts] = useState([]);
 
+    console.log(add);
+
     useEffect(() => {
         const token = getToken();
         fetch(`https://strangers-things.herokuapp.com/api/2010-LSU-RM-WEB-PT/users/me`, {
@@ -39,7 +41,7 @@ const MyPosts = () => {
             setFilteredPosts(result.data.posts)
           })
           .catch(console.error);
-    }, []);
+    },[add]);
 
     useEffect(() => {
         fetch(`https://strangers-things.herokuapp.com/api/2010-LSU-RM-WEB-PT/posts`)
@@ -50,7 +52,7 @@ const MyPosts = () => {
             setStrangersPosts(posts);
             })
             .catch(console.error);
-    }, []);
+    },[add]);
 
     const TabPanel = (props) => {
         const {children, value, index} = props;
@@ -89,7 +91,6 @@ const MyPosts = () => {
                         </Grid>
                     </Grid>
                 </div>
-                {console.log(searchTerm)}
                 </div>
 
             <Container maxWidth="md">
@@ -100,11 +101,12 @@ const MyPosts = () => {
                 <Tab label="Stranger's Posts"></Tab>
             </Tabs>
             <TabPanel value={value} index={0}><div className="MyPosts-container">
-                            
-                            {filteredPosts.filter((post) => {
-                                if(searchTerm == ''){
+                            {posts.filter((post) => {
+                                if (searchTerm == '') {
                                     return post
-                                }else if(post.title.toLowerCase().includes(searchTerm.toLowerCase())){
+                                } else if (post.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+                                    
+                                    console.log(post);
                                     return post
                                 }
                             }).map((post, idx) => {
@@ -273,7 +275,15 @@ const MyPosts = () => {
                         </div></TabPanel>
             <TabPanel value={value} index={1}>{
                 <div className='post-container'>
-                    {strangersPosts.map((post, idx) => {
+                    {strangersPosts.filter((post) => {
+                                if (searchTerm == '') {
+                                    return post
+                                } else if (post.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+                                    
+                                    console.log(post);
+                                    return post
+                                }
+                    }).map((post, idx) => {
                             return (
                                 <>
                                     <div key={idx}>
@@ -304,13 +314,15 @@ const MyPosts = () => {
                                                     >
                                                     <DialogContent>
                                                     <TextField
-                                                    
+                                                        autoFocus
                                                         id="Message"
                                                         label="Message"
                                                         type="text"
                                                         fullWidth
                                                         value={message}
-                                                        onChange={(event) => setMessage(event.target.value)}
+                                                        onChange={(event) => {
+                                                            setMessage(event.target.value);
+                                                        }}
                                                         
                                                     />
                                                     <Button 
