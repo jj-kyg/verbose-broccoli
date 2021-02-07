@@ -1,7 +1,6 @@
 import AddIcon from '@material-ui/icons/Add';
-import { Checkbox, Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControlLabel } from '@material-ui/core';
+import { Checkbox, Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel } from '@material-ui/core';
 import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import { purple } from '@material-ui/core/colors';
 import './createPost.css';
 import { useState, useEffect } from 'react';
 import { getToken } from '../auth'
@@ -13,7 +12,6 @@ const CreatePost = ({
     setAdd
 }) => {
 
-    const [userInfo, setUserInfo] = useState();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
@@ -29,17 +27,18 @@ const CreatePost = ({
 
     const theme = createMuiTheme({
         palette: {
-          primary: purple,
+          primary: {
+            main: '#589aafff',
+          }
         },
         secondary: {
-            main: '#80d8ff',
+            main: '#e737a7ff',
           },
-    });
-
+    })
     const ColorButton = withStyles((theme) => ({
         root: {
           fontFamily: [
-            'Courier New', 'Courier', 'monospace'
+            'Varela', 'Courier', 'monospace'
           ].join(','),
         },
       }))(Button);

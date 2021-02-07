@@ -1,51 +1,39 @@
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { useState } from 'react'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import { purple } from '@material-ui/core/colors';
-import { shadows } from '@material-ui/system';{/*can i use this to set box shadows on modals? */}
+
 import './login.css';
 import { loginUser } from '../api';
 import { getToken } from '../auth';
 
-
-
 const Login = ({
     setLoggedIn,
     setUsername,
-    currentUser
 }) => {
-
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
-
     const useStyles = makeStyles((theme) => ({
         margin: {
             margin: theme.spacing(1),
         },
     }));
-
     const theme = createMuiTheme({
         palette: {
-          primary: purple,
+          primary: {
+            main: '#021b27ff'
+          },
         },
         secondary: {
-            main: '#80d8ff',
+            main: '#e737a7ff',
           },
     });
-
     const ColorButton = withStyles((theme) => ({
         root: {
-          fontFamily: [
-            'Courier New', 'Courier', 'monospace'
-          ].join(','),
+          
         },
       }))(Button);
-
-
     const classes = useStyles();
-
     return (
         <div className="login-container">
             <ThemeProvider theme={theme}>
@@ -62,7 +50,8 @@ const Login = ({
                 boxShadow={3}
                 PaperProps={{
                     style: {
-                    backgroundColor: '#ef1a56ff',
+                    backgroundColor: '#589aafff',
+                    color: '#f6e8a2ff'
                     },
                 }}
                 >
@@ -112,9 +101,7 @@ const Login = ({
                             token ? setUsername(value) : '';
                             token ? setLoggedIn(true) : setLoggedIn(false);
                             console.log(token);
-                        }, 1200);
-                        
-                        
+                        }, 1200);   
                     }} 
                     color="primary">
                     Login

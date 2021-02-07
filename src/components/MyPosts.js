@@ -53,7 +53,6 @@ const MyPosts = ({add}) => {
             })
             .catch(console.error);
     },[add]);
-
     const TabPanel = (props) => {
         const {children, value, index} = props;
         return (
@@ -63,25 +62,25 @@ const MyPosts = ({add}) => {
             </div> 
         )
     }
-
     return (
         <>
             <div className="search">
-                <div id="search-group">
+                <div id="search-group" style={{borderRadius: '8px'}}>
                     <Grid 
                         container 
                         spacing={1} 
                     >
                     <div id="search-icon">
                         <Grid item>
-                        <SearchIcon />
+                        <SearchIcon
+                            fontSize="large"
+                            color="secondary" 
+                        />
                         </Grid>
                     </div>
                         <Grid item>
                         <TextField 
                             id="search-entry" 
-                            // defaultValue="Search Posts"
-                            label="Search Posts"
                             placeholder="Search Posts..."
                             variant="outlined" 
                             value={searchTerm}
@@ -92,20 +91,29 @@ const MyPosts = ({add}) => {
                     </Grid>
                 </div>
                 </div>
-
             <Container maxWidth="md">
-            <Tabs value={value} onChange={(event, val) => {
+            <Tabs 
+                value={value} 
+                onChange={(event, val) => {
                 setValue(val);
             }}>
-                <Tab label="My Posts"></Tab>
-                <Tab label="Stranger's Posts"></Tab>
+                <Tab 
+                    label="My Posts"    
+                >
+                </Tab>
+                <Tab 
+                label="Stranger's Posts"
+                >
+                </Tab>
             </Tabs>
-            <TabPanel value={value} index={0}><div className="MyPosts-container">
+            <TabPanel 
+                value={value} 
+                index={0}><div 
+                className="gridbox">
                             {posts.filter((post) => {
                                 if (searchTerm == '') {
                                     return post
                                 } else if (post.title.toLowerCase().includes(searchTerm.toLowerCase())) {
-                                    
                                     console.log(post);
                                     return post
                                 }
@@ -113,17 +121,17 @@ const MyPosts = ({add}) => {
                                 return (
                                     <>
                                         <div key={idx}>
-                                            <h1 className='post-title'>{post.title}</h1> {/* post title */}
-                                            <h3 className='post-description'>{post.description}</h3> {/* post description */}
-                                            <h3 className='post-price'>Price: {post.price}</h3> {/* price */}
-                                            <h3 className='post-author'>Seller: {post.author.username}</h3> {/* username */}
-                                            <h3 className='post-location'>Location:{post.location}</h3> {/* username */}
+                                            <h1 className='post-title'>{post.title}</h1> 
+                                            <h3 className='post-description'>{post.description}</h3> 
+                                            <h3 className='post-price'>Price: {post.price}</h3> 
+                                            <h3 className='post-author'>Seller: {post.author.username}</h3> 
+                                            <h3 className='post-location'>Location:{post.location}</h3> 
                                             {post.active ? '' : <h3 style={{color: 'red'}}>This post has been deleted</h3>}
                                             <div>      
                                                 <Button
                                                     style={{marginRight: '5px'}}
                                                     variant="outlined" 
-                                                    color="secondary" 
+                                                    color="#021b27ff" 
                                                     onClick={() => {
                                                         setOpen(true);
                                                         console.log(post._id);
@@ -150,8 +158,7 @@ const MyPosts = ({add}) => {
                                                         type="text"
                                                         fullWidth
                                                         value={title}
-                                                        onChange={(event) => setTitle(event.target.value)}
-                                                        
+                                                        onChange={(event) => setTitle(event.target.value)}   
                                                     />
                                                     <TextField
                                                         autoFocus
@@ -160,8 +167,7 @@ const MyPosts = ({add}) => {
                                                         type="text"
                                                         fullWidth
                                                         value={description}
-                                                        onChange={(event) => setDescription(event.target.value)}
-                                                        
+                                                        onChange={(event) => setDescription(event.target.value)} 
                                                     />
                                                     <TextField
                                                         autoFocus
@@ -170,8 +176,7 @@ const MyPosts = ({add}) => {
                                                         type="text"
                                                         fullWidth
                                                         value={price}
-                                                        onChange={(event) => setPrice(event.target.value)}
-                                                        
+                                                        onChange={(event) => setPrice(event.target.value)}  
                                                     />
                                                     <TextField
                                                         autoFocus
@@ -180,8 +185,7 @@ const MyPosts = ({add}) => {
                                                         type="text"
                                                         fullWidth
                                                         value={location}
-                                                        onChange={(event) => setLocation(event.target.value)}
-                                                        
+                                                        onChange={(event) => setLocation(event.target.value)} 
                                                     />
                                                     <FormControlLabel
                                                         control={
@@ -209,7 +213,7 @@ const MyPosts = ({add}) => {
                                                 <Button 
                                                     style={{marginRight: '5px'}}
                                                     variant="outlined" 
-                                                    color="secondary" 
+                                                    color="#021b27ff" 
                                                     onClick={() => {
                                                         console.log(post);
                                                         setClickedPost(post);
@@ -222,16 +226,17 @@ const MyPosts = ({add}) => {
                                                     color="secondary" 
                                                     onClick={() => {
                                                         setMessageOpen(true);
-                                                        console.log('message btn');
+                                                       
                                                     }}>
                                                     <Badge 
                                                         badgeContent={post.messages.length} 
                                                         color="primary" 
-                                                        onClick={() => console.log(post)}>
+                                                        onClick={() => setClickedPost(post)}>
                                                     <MailIcon />
                                                 </Badge>
                                                 </Button>
-                                                <Dialog className='login-modal-backdrop'
+                                                <Dialog 
+                                                    className='login-modal-backdrop'
                                                     open={messageOpen} 
                                                     onClose={() => setMessageOpen(false)}
                                                     boxShadow={3}
@@ -242,17 +247,16 @@ const MyPosts = ({add}) => {
                                                     }}
                                                     >
                                                     <DialogContent>
-                                                        <DialogContentText>
-                                                            
-                                                                {post.messages ? post.messages.map((message) => {
+                                                                {clickedPost ? clickedPost.messages.map((message) => {
                                                                     return (
-                                                                        
-                                                                    `${message.content}`
-                                                                        
-                                                                    )
-                                                                }): 'Close this'}    
-                                                            
-                                                        </DialogContentText>
+                                                                    <>
+                                                                    <div>From: {message.fromUser.userName}</div>
+                                                                    <div>Message: {message.content}</div>
+                                                                    <div>Time: {clickedPost.updatedAt}</div>
+                                                                    <hr/>
+                                                                    </>  
+                                                                    ) 
+                                                                }): ''}
                                                     </DialogContent>
                                                     <DialogActions>
                                                         <Button 
@@ -273,8 +277,12 @@ const MyPosts = ({add}) => {
                             })
                             }             
                         </div></TabPanel>
-            <TabPanel value={value} index={1}>{
-                <div className='post-container'>
+            <TabPanel 
+                value={value} 
+                index={1}
+                >
+                {
+                <div className='gridbox'>
                     {strangersPosts.filter((post) => {
                                 if (searchTerm == '') {
                                     return post
@@ -287,14 +295,14 @@ const MyPosts = ({add}) => {
                             return (
                                 <>
                                     <div key={idx}>
-                                        <h1 className='post-title'>{post.title}</h1> {/* post title */}
-                                        <h3 className='post-description'>{post.description}</h3> {/* post description */}
-                                        <h3 className='post-price'>Price: {post.price}</h3> {/* price */}
-                                        <h3 className='post-author'>Seller: {post.author.username}</h3> {/* username */}
-                                        <h3 className='post-location'>Location:{post.location}</h3> {/* username */}
+                                        <h1 className='post-title'>{post.title}</h1> 
+                                        <h3 className='post-description'>{post.description}</h3> 
+                                        <h3 className='post-price'>Price: {post.price}</h3> 
+                                        <h3 className='post-author'>Seller: {post.author.username}</h3> 
+                                        <h3 className='post-location'>Location:{post.location}</h3>
                                         <div>      
                                             <Button 
-                                                variant="outlined" 
+                                                variant="contained" 
                                                 color="secondary" 
                                                 onClick={() => {
                                                     setOpen(true);

@@ -1,65 +1,10 @@
 .search {
-    display: grid;
-    grid-template-columns: 1fr 50% 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    height: 100px;
-    grid-area: search;
-}
-
-#search {
-    display: grid;
-    grid-column: 2;
-    grid-row: 1;
-    background-color: rgba(189, 196, 202);
-}
-
-#go {
-    border: none;
-    border-radius: 4px;
-    width: 15%;
-    padding: 10px;
-    background-color: rgb(155, 161, 187);
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 15px;
-    color: rgb(222, 21, 9);
-    cursor: pointer;
-}
-
-fieldset {
-    border: none;
-    border-radius: 6px;
-    color: rgb(222, 21, 9);
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 20px;
-    background-color: rgb(14, 55, 98, .8);
-    
-}
-input[type=text] {
-    border: none;
-    border-radius: 6px;
-    background-color: transparent;
-    padding: 10px;
-    width: 70%;
-    color: white;
-    font-size: 20px;
-    padding-left: 38px;
-}
-
-.no-outline:focus {
-    outline: none;
-}
-
-#search-icon {
     display: flex;
-    align-items: center;
-}
-
-#search-group {
-    display: grid;
-    grid-column: 2;
+    height: 8vh;
+    grid-area: search;
     justify-content: center;
+    margin: 15px;
 }
-
-.MuiOutlinedInput-root {
-    width: 350px;
+#search-entry{
+    background: #589aafff;
 }

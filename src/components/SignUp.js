@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import { purple } from '@material-ui/core/colors';
 import './login.css';
 
 const SignUp = ({
@@ -27,15 +26,16 @@ const SignUp = ({
         },
       }))(Button);
 
-    const theme = createMuiTheme({
+      const theme = createMuiTheme({
         palette: {
-          primary: purple,
+          primary: {
+            main: '#589aafff'
+          },
         },
         secondary: {
-            main: '#80d8ff',
+            main: '#e737a7ff',
           },
       });
-
 
     const classes = useStyles();
 
@@ -54,8 +54,8 @@ const SignUp = ({
                 onClose={() => setOpen(false)}
                 PaperProps={{
                     style: {
-                    backgroundColor: '#ef1a56ff',
-                    boxShadow: 'none',
+                    backgroundColor: '#589aafff',
+                    color: '#f6e8a2ff'
                     },
                 }}>
             <DialogTitle id="sign-up-modal-title">Sign Up</DialogTitle>
@@ -79,7 +79,6 @@ const SignUp = ({
                 fullWidth
                 value={passwordValue}
                 onChange={(event) => setPasswordValue(event.target.value)}
-                
             />
             </DialogContent>
             <DialogActions>

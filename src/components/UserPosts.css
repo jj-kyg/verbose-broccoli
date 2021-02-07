@@ -1,35 +1,61 @@
 
-.post-container{
-    height: 300px;
-    width: 100%;
-    overflow-y: auto;
-    scrollbar-color: rgb(237, 73, 128) rgb(41, 127, 197, 0.6);
-    background-color: rgb(41, 127, 197, 0.6);
-    color:  #f9f2f0ff;
-    padding: 8px;
-    display: grid;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    box-shadow: 30px -10px 8px rgba(158, 23, 65, 0.4);
-}
 .post-title{
     text-align: center;
-    text-decoration: underline;
-    background-color:  #2eb0dcff;
+    background-color:  rgb(2, 27, 39, .35);
     padding: 5px;
     margin-top: -5px;
     width: auto;
+    color: #021b27ff;
+    font-family: 'Lato', sans-serif;
+    font-weight: bolder;
+}
+.gridbox{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: stretch;
+    margin: 0 auto;
+    width: 100%;
+    height: 60vh;
+    padding: 15px;
+    background-color: rgba(88, 154, 175, .80);
+    overflow-y: auto;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    border-radius: 8px;
+    color: #021b27ff;
+}
+.gridbox1{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: stretch;
+    margin: 0 auto;
+    width: 65%;
+    height: 60vh;
+    padding: 15px;
+    background-color: rgba(88, 154, 175, .80);
+    overflow-y: auto;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    border-radius: 8px;
+    color: #021b27ff;
 }
 
-.strangers {
-    margin-right: 5px;
-    display: inline;
-    position: relative;
-    font: 25px monospace;
-    letter-spacing: 1px;
-    text-decoration: rgb(245, 245, 245, 0.8);
-    color: rgb(177, 240, 248);
+.gridbox::-webkit-scrollbar {
+    display: none;
+  }
+
+.post-description{
+    font-family: 'Teko', sans-serif;
+    padding: 10px;
+    font-size: 16pt;
 }
+.post-price .post-author-username .post-location{
+    margin-left: 3em;
+}
+
+
 
 
 

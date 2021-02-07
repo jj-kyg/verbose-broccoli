@@ -55,7 +55,6 @@ const App = () => {
                         }
                 </Router>
             </div>
-            <Footer loggedIn={loggedIn}/>
         </div>
     )
 }

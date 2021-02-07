@@ -1,14 +1,12 @@
 .footer {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     color: rgb(62, 73, 190);
-    padding-top: 65px;
-    padding-left: 15px;
 }
-
 .footer1 {
     display: flex;
     justify-content: center;
+    flex-shrink: 1;
     color: rgb(62, 73, 190);
     padding: 18.5px;
 }

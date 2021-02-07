@@ -1,22 +1,28 @@
-
-.header-items {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas: "logo linkOne linkTwo";
-   
-
+.header {
+    display: flex;
+    margin: 15px;
+    flex-grow: 1;
 }
-.links {
-    grid-area: linkTwo;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.header-btns {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: flex-end;
     align-items: center;
-    text-decoration: 1.5px underline;
 }
-
-.img {
-    display: grid;
-    margin-top: 5px;
+.header-btns button{
+    background: #589aafff
+}
+#logo {
+    width: 25vw;
+}
+.username {
+    margin-right: 5px;
+    display: flex;
+    font-family: 'leto';
+    font-size: 3vh;
+    color: #f6e8a2ff;
+    align-content: center;
     align-items: center;
 }
 

@@ -1,7 +1,7 @@
 import './UserPosts.css';
 import './Search.css';
 import { useState, useEffect } from 'react';
-import { Grid, Container, Button, TextField, DialogContentText, Dialog, DialogContent} from '@material-ui/core';
+import { Grid, Button, TextField, DialogContentText, Dialog, DialogContent} from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
 const UserPosts = ({
@@ -22,42 +22,36 @@ const UserPosts = ({
             })
             .catch(console.error);
     }, []);
-    
-    
     return (
         <>
-            <div className="search">
-            <div id="search-group">
-                <Grid 
-                    container 
-                    spacing={1} 
-                >
-                <div id="search-icon">
-                    <Grid item>
-                    <SearchIcon />
+        <div className="search">
+                <div id="search-group">
+                    <Grid 
+                        container 
+                        spacing={1} 
+                    >
+                    <div id="search-icon">
+                        <Grid item>
+                        <SearchIcon 
+                            fontSize="large"
+                            color="secondary"
+                        />
+                        </Grid>
+                    </div>
+                        <Grid item>
+                        <TextField 
+                            id="search-entry" 
+                            placeholder="Search Posts..."
+                            variant="outlined" 
+                            value={searchTerm}
+                            onChange={(event) => setSearchTerm(event.target.value)} 
+                        />
+                        </Grid>
                     </Grid>
                 </div>
-                    <Grid item>
-                    <TextField 
-                        id="search-entry" 
-                        // defaultValue="Search Posts"
-                        label="Search Posts"
-                        placeholder="Search Posts..."
-                        variant="outlined" 
-                        value={searchTerm}
-                        onChange={(event) => setSearchTerm(event.target.value)} 
-                        
-                    />
-                    </Grid>
-                </Grid>
-            </div>
-            {console.log(searchTerm)}
-            </div>
-        )
-
-            <Container maxWidth="md">
-                {
-                <div className='post-container'>
+        </div>
+        <div className="gridbox1">
+                <div className='post-container-main'>
                     {posts.filter((post) => {
                                 if (searchTerm == '') {
                                     return post
@@ -124,9 +118,8 @@ const UserPosts = ({
                             )
                     })}
                 </div> 
-                }
-            </Container>
-        </>
+    </div>
+    </>
     );
 }
 
