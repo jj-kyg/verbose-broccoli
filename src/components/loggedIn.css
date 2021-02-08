@@ -10,12 +10,13 @@
 }
 
 #description input {
+    font-family: 'Teko', sans-serif;
+    padding: 10px;
+    font-size: 2em;
     background-color: transparent;
     border: none;
     outline: none;
     width: 100%;
-    color: rgb(2, 27, 39);
-    font-size: 19px;
 }
 
 #price input {
@@ -34,4 +35,12 @@
     width: 100%;
     color: rgb(2, 27, 39);
     font-size: 19px;
+}
+.post-description{
+    font-family: 'Teko', sans-serif;
+    padding: 10px;
+    font-size: 2em;
+}
+.post-price .post-author-username .post-location{
+    margin-left: 3em;
 }

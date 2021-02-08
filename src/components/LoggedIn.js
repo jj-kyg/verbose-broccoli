@@ -2,16 +2,15 @@ import './Search.css';
 import './loggedIn.css';
 import { getToken } from '../auth';
 import { useState, useEffect } from 'react';
-import {Badge, Grid, Tabs, Tab, Container, TextField, FormControlLabel, Checkbox, Button, Dialog, DialogContent, DialogActions } from '@material-ui/core';
+import {Badge, Grid, Tabs, Tab, Container, TextField, Button, Dialog, DialogContent, DialogActions } from '@material-ui/core';
 import { editPost, deletePost, sendMessage } from '../api';
 import SearchIcon from '@material-ui/icons/Search';
 import MailIcon from '@material-ui/icons/Mail';
-
+import { createMuiTheme, withStyles, ThemeProvider, } from '@material-ui/core/styles';
 const MyPosts = ({
     add,
     setAdd
 }) => {
-
     const [posts, setPosts] = useState([]);
     const [strangersPosts, setStrangersPosts] = useState([]);
     const [open, setOpen] = useState(false);
@@ -29,8 +28,22 @@ const MyPosts = ({
     const [filteredPosts, setFilteredPosts] = useState([]);
     const [msg, setMsg] = useState(false);
     const [editSubmit, setEditSubmit] = useState(false);
+    const theme = createMuiTheme({
+        palette: {
+          primary: {
+            main: '#021b27ff'
+          },
+        },
+        secondary: {
+            main: '#e737a7ff',
+          },
+    });
+    const ColorButton = withStyles((theme) => ({
+        root: {
+        },
+      }))(Button);
+    
 
-    console.log(add);
 
     useEffect(() => {
         const token = getToken();
@@ -132,14 +145,15 @@ const MyPosts = ({
                                         <div className='edit'>
                                             <p id="title"><input type="text" id={idx} value={post.title} onChange={(event) => setTitle(event.target.value)} /></p>
                                             <p id="description"><input type="text" id={idx} value={post.description} onChange={(event) => setDescription(event.target.value)} /></p>
-                                            <p id="description"><input type="text" id={idx} value={post.price} onChange={(event) => setPrice(event.target.value)} /></p>
-                                            <p id="location"><input type="text" id={idx} value={post.location} onChange={(event) => setLocation(event.target.value)} /></p>
-                                            {post.active ? '' : <h3 style={{color: '#f50057'}}>POST DELETED</h3>}
+                                            <p id="price">Price:<input type="text" id={idx} value={post.price} onChange={(event) => setPrice(event.target.value)} /></p>
+                                            <p id="location">Location:<input type="text" id={idx} value={post.location} onChange={(event) => setLocation(event.target.value)} /></p>
+                                            {post.active ? '' : <h3 style={{color: '#e737a7ff'}}>POST DELETED</h3>}
                                             <div>  
                                                 {   editSubmit ?
                                                     ''
                                                     :
-                                                    <Button
+                                                <ThemeProvider theme={theme}>
+                                                    <ColorButton 
                                                         style={{marginRight: '5px'}}
                                                         variant="contained" 
                                                         color="primary"
@@ -151,11 +165,13 @@ const MyPosts = ({
                                                             setEditSubmit(true);
                                                         }}>
                                                         Edit Post
-                                                    </Button>
+                                                    </ColorButton> 
+                                                </ThemeProvider>
                                                 }
                                                 { 
                                                     editSubmit ?
-                                                    <Button
+                                                <ThemeProvider theme={theme}>
+                                                    <ColorButton 
                                                         style={{marginRight: '5px'}}
                                                         variant="contained" 
                                                         color="primary"
@@ -165,7 +181,8 @@ const MyPosts = ({
                                                             editPost(title, description, price, location, checked, id);
                                                         }}>
                                                         Submit Edited Post
-                                                    </Button>
+                                                    </ColorButton> 
+                                                </ThemeProvider>
                                                     : ''
                                                 }
                                                 <Dialog className='login-modal-backdrop'
@@ -174,7 +191,7 @@ const MyPosts = ({
                                                     boxShadow={3}
                                                     PaperProps={{
                                                         style: {
-                                                        backgroundColor: '#ef1a56ff',
+                                                        backgroundColor: '#589aafff',
                                                         },
                                                     }}
                                                     >
@@ -182,41 +199,48 @@ const MyPosts = ({
                                                         Click on Text of Post to Edit!
                                                     </DialogContent>
                                                     <DialogActions>
-                                                        <Button 
+                                                    <ThemeProvider theme={theme}>
+                                                        <ColorButton 
                                                             onClick={() => {
                                                                 setOpen(false);
                                                             }} 
                                                             color="primary">
                                                             Close
-                                                        </Button>
+                                                        </ColorButton> 
+                                                    </ThemeProvider>
                                                     </DialogActions>
                                                     </Dialog>  
-                                                <Button 
-                                                    style={{marginRight: '5px'}}
-                                                    variant="contained" 
-                                                    color="primary" 
-                                                    onClick={() => {
-                                                        console.log(post);
-                                                        setClickedPost(post);
-                                                        deletePost(post._id);
-                                                        alert("Post Deleted!");
-                                                        setAdd(Math.random() * 5);
-                                                    }}>
-                                                    Delete Post
-                                                </Button>
-                                                <Button
-                                                    color="secondary" 
-                                                    onClick={() => {
-                                                        setMessageOpen(true);
+                                                <ThemeProvider theme={theme}>
+                                                    <ColorButton  
+                                                        style={{marginRight: '5px'}}
+                                                        variant="contained" 
+                                                        color="primary" 
+                                                        onClick={() => {
+                                                            console.log(post);
+                                                            setClickedPost(post);
+                                                            deletePost(post._id);
+                                                            alert("Post Deleted!");
+                                                            setAdd(Math.random() * 5);
+                                                        }}>
+                                                        Delete Post
+                                                    </ColorButton> 
+                                                </ThemeProvider>
+                                                <ThemeProvider theme={theme}>
+                                                    <ColorButton 
+                                                        color="secondary" 
+                                                        onClick={() => {
+                                                            setMessageOpen(true);
                                                        
-                                                    }}>
+                                                        }}>
                                                     <Badge 
                                                         badgeContent={post.messages.length} 
                                                         color="primary" 
                                                         onClick={() => setClickedPost(post)}>
-                                                    <MailIcon />
-                                                </Badge>
-                                                </Button>
+                                                        <MailIcon
+                                                            color="#722880ff" />
+                                                    </Badge>
+                                                    </ColorButton> 
+                                                </ThemeProvider>
                                                 <Dialog 
                                                     className='login-modal-backdrop'
                                                     open={messageOpen} 
@@ -224,7 +248,7 @@ const MyPosts = ({
                                                     boxShadow={3}
                                                     PaperProps={{
                                                         style: {
-                                                        backgroundColor: '#ef1a56ff',
+                                                        backgroundColor: '#589aafff',
                                                         },
                                                     }}
                                                     >
@@ -241,13 +265,15 @@ const MyPosts = ({
                                                                 }): ''}
                                                     </DialogContent>
                                                     <DialogActions>
-                                                        <Button 
+                                                <ThemeProvider theme={theme}>
+                                                        <ColorButton  
                                                             onClick={() => {
                                                                 setMessageOpen(false);   
                                                             }} 
                                                             color="primary">
                                                             Close
-                                                        </Button>
+                                                        </ColorButton> 
+                                                </ThemeProvider>
                                                     </DialogActions>
                                                     </Dialog>  
                                                  
@@ -287,20 +313,23 @@ const MyPosts = ({
                                     }}
                                     
                                 />
-                                <Button 
-                                    onClick={() => {
-                                        sendMessage(id, message);
-                                        alert("Message Sent!");
-                                        setMsg(false);
-                                    }} 
-                                    color="primary">
-                                    Send
-                                </Button> 
+                                <ThemeProvider theme={theme}>
+                                    <ColorButton 
+                                        onClick={() => {
+                                            sendMessage(id, message);
+                                            alert("Message Sent!");
+                                            setMsg(false);
+                                        }} 
+                                        color="primary">
+                                        Send
+                                    </ColorButton> 
+                                </ThemeProvider> 
                                 <div>      
                                     { 
                                         msg ?
                                             ''
-                                        : <Button 
+                                        : <ThemeProvider theme={theme}>
+                                                <ColorButton 
                                                 variant="contained" 
                                                 color="primary" 
                                                 onClick={() => {
@@ -310,7 +339,8 @@ const MyPosts = ({
                                                     
                                                 }}>
                                                 Send Message
-                                            </Button> 
+                                                </ColorButton> 
+                                        </ThemeProvider> 
                                     }
                                     <hr />     
                                 </div>
@@ -338,7 +368,8 @@ const MyPosts = ({
                                             { 
                                                 msg ?
                                                     ''
-                                                : <Button 
+                                                : <ThemeProvider theme={theme}>
+                                                    <ColorButton  
                                                         variant="contained" 
                                                         color="primary" 
                                                         onClick={() => {
@@ -348,7 +379,8 @@ const MyPosts = ({
                                                             
                                                         }}>
                                                         Send Message
-                                                    </Button> 
+                                                    </ColorButton> 
+                                                </ThemeProvider> 
                                             }
                                             <hr />     
                                         </div>

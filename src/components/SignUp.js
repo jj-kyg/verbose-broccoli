@@ -84,7 +84,7 @@ const SignUp = ({
             <DialogActions>
                 <Button 
                     onClick={() => setOpen(false)} 
-                    color="primary">
+                    backgroundColor="#021b27ff">
                     Cancel
                 </Button>
                 <Button 
@@ -92,7 +92,7 @@ const SignUp = ({
                         setOpen(false);
                         registerUser(value, passwordValue);
                     }} 
-                    color="primary">
+                    backgroundColor="#021b27ff">
                     <Link to="/">Sign Up</Link>
                 </Button>
             </DialogActions>

@@ -8,6 +8,7 @@
     color: #021b27ff;
     font-family: 'Lato', sans-serif;
     font-weight: bolder;
+    
 }
 .gridbox{
     display: flex;
@@ -40,6 +41,7 @@
     -ms-overflow-style: none;
     border-radius: 8px;
     color: #021b27ff;
+    box-shadow: 12px 0 15px -4px rgba(114, 40, 128, .8), -12px 0 8px -4px rgba(114, 40, 128, .8);
 }
 
 .gridbox::-webkit-scrollbar {
@@ -49,11 +51,12 @@
 .post-description{
     font-family: 'Teko', sans-serif;
     padding: 10px;
-    font-size: 16pt;
+    font-size: 2em;
 }
 .post-price .post-author-username .post-location{
     margin-left: 3em;
 }
+
 
 
 
