@@ -142,6 +142,7 @@ const MyPosts = ({
                             }).map((post, idx) => {
                                 return (
                                     <>
+                                        {/* edit post attempt */}
                                         <div className='edit'>
                                             <p id="title"><input type="text" id={idx} value={post.title} onChange={(event) => setTitle(event.target.value)} /></p>
                                             <p id="description"><input type="text" id={idx} value={post.description} onChange={(event) => setDescription(event.target.value)} /></p>
@@ -196,7 +197,7 @@ const MyPosts = ({
                                                     }}
                                                     >
                                                     <DialogContent>
-                                                        Click on Text of Post to Edit!
+                                                        Feature Coming Soon
                                                     </DialogContent>
                                                     <DialogActions>
                                                     <ThemeProvider theme={theme}>
